@@ -12,3 +12,5 @@ npm-debug.log
 cypress/videos
 cypress/plugins
 cypress/support
+.nyc_output
+coverage
