@@ -25,3 +25,4 @@ jobs:
     - run: npm ci
     - run: nohup npm start &
     - run: npm run pw-test
+    - run: npm run cp-test

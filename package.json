@@ -20,7 +20,8 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test --env=node",
-    "pw-test": "npx playwright test tests"
+    "pw-test": "npx playwright test tests",
+    "cp-test": "npx cypress run --key edaac9f9-09f0-4f2d-9144-5b3e4bbf9335"
   },
   "browserslist": [
     ">0.2%",
