@@ -14,3 +14,4 @@ cypress/plugins
 cypress/support
 .nyc_output
 coverage
+*.docx

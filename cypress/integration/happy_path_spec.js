@@ -1,5 +1,5 @@
-describe('Thus test', () => {
-    it('should alway pass', () => {
+describe('This test', () => {
+    it('should always pass', () => {
         expect(true).to.equal(true)
     })
 })
