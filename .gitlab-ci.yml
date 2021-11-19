@@ -1,8 +1,8 @@
 stages:
-  # - cypress_test
-  
   - playwright_test
-     
+
+  - cypress_test
+
 cache:
 
   paths:
@@ -30,16 +30,16 @@ playwright:test:
   only:
     - feature/gitlab
 
-# cypress:test:
+cypress:test:
 
-#   image: cypress/browsers:node12.14.1-chrome85-ff81
+  image: cypress/browsers:node12.14.1-chrome85-ff81
 
-#   stage: cypress_test
+  stage: cypress_test
   
-#   script:
-#     - npm ci
-#     - nohup npm run start &
-#     - npm run cp-test
+  script:
+    - npm ci
+    - nohup npm run start &
+    - npm run cp-test
 
-#   only:
-#     - feature/gitlab
+  only:
+    - feature/gitlab
