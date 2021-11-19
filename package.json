@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test --env=node",
-    "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" npm run pw-test",
+    "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" npm run test:pw",
     "test:pw": "npx playwright test tests",
     "test:cy": "npx cypress run"
   },
