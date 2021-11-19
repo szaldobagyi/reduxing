@@ -1,45 +1,49 @@
 stages:
-  - playwright_test
-
-  - cypress_test
+  - build
+  - test
 
 cache:
 
   paths:
     - node_modules/
-    - $HOME/.npm
-    - ~/.cache/ms-playwright
 
+install packages:
 
-playwright:test:
-
-  image: mcr.microsoft.com/playwright:focal
-
-  stage: playwright_test
+  stage: build
   
   script:
     - apt-get update
     - apt-get install wget -y
     - PLAYWRIGHT_BROWSERS_PATH=0
     - npm ci
-    - nohup npm run start &
-    - npx playwright install
-    - npx playwright install chrome
-    - npm run pw-test
 
   only:
     - feature/gitlab
 
-cypress:test:
+playwright test:
+
+  image: mcr.microsoft.com/playwright:focal
+
+  stage: test
+  
+  script:
+    - nohup npm run start &
+    - npx playwright install
+    - npx playwright install chrome
+    - npm run pw:test
+
+  only:
+    - feature/gitlab
+
+cypress test:
 
   image: cypress/browsers:node12.14.1-chrome85-ff81
 
-  stage: cypress_test
+  stage: test
   
   script:
-    - npm ci
     - nohup npm run start &
-    - npm run cp-test
+    - npm run cy:test
 
   only:
     - feature/gitlab
