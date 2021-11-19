@@ -3,20 +3,21 @@ stages:
   - test
 
 cache:
-
+  key: "$CI_COMMIT_REF_SLUG"
   paths:
-    - node_modules/
+    - .npm/
 
-install packages:
+before_script:
+  - npm ci --cache .npm --prefer-offline
+
+
+install modules:
 
   image: node:latest
 
   stage: build
   
   script:
-    - apt-get update
-    - apt-get install wget -y
-    - PLAYWRIGHT_BROWSERS_PATH=0
     - npm ci
 
   only:
@@ -27,12 +28,15 @@ playwright test:
   image: mcr.microsoft.com/playwright:focal
 
   stage: test
-  
+
   script:
+    - apt-get update
+    - apt-get install wget -y
+    - PLAYWRIGHT_BROWSERS_PATH=0
     - nohup npm run start &
     - npx playwright install
     - npx playwright install chrome
-    - npm run pw:test
+    - npm run test:cy
 
   only:
     - feature/gitlab
@@ -45,7 +49,7 @@ cypress test:
   
   script:
     - nohup npm run start &
-    - npm run cy:test
+    - npm run test:cy
 
   only:
     - feature/gitlab

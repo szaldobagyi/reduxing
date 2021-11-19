@@ -22,8 +22,8 @@
     "eject": "react-scripts eject",
     "test": "react-scripts test --env=node",
     "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" npm run pw-test",
-    "pw:test": "npx playwright test tests",
-    "cy:test": "npx cypress run"
+    "test:pw": "npx playwright test tests",
+    "test:cy": "npx cypress run"
   },
   "browserslist": [
     ">0.2%",
