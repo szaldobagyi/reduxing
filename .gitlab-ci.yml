@@ -9,6 +9,8 @@ cache:
 
 install packages:
 
+  image: node:latest
+
   stage: build
   
   script:
