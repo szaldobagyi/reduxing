@@ -1,24 +1,45 @@
-build-job:
-  stage: build
-  script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
-
-test-job1:
-  stage: test
-  script:
-    - echo "This job tests something"
-
-test-job2:
-  stage: test
-  script:
-    - echo "This job tests something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 20
-
-deploy-prod:
-  stage: deploy
-  script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
-
+stages:
+  # - cypress_test
   
+  - playwright_test
+     
+cache:
+
+  paths:
+    - node_modules/
+    - $HOME/.npm
+    - ~/.cache/ms-playwright
+
+
+playwright:test:
+
+  image: mcr.microsoft.com/playwright:focal
+
+  stage: playwright_test
+  
+  script:
+    - apt-get update
+    - apt-get install wget -y
+    - PLAYWRIGHT_BROWSERS_PATH=0
+    - npm ci
+    - nohup npm run start &
+    - npx playwright install
+    - npx playwright install chrome
+    - npm run pw-test
+
+  only:
+    - feature/gitlab
+
+# cypress:test:
+
+#   image: cypress/browsers:node12.14.1-chrome85-ff81
+
+#   stage: cypress_test
+  
+#   script:
+#     - npm ci
+#     - nohup npm run start &
+#     - npm run cp-test
+
+#   only:
+#     - feature/gitlab
